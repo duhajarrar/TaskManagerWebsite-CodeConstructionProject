@@ -1,0 +1,31 @@
+<div class="container">
+  <header class="header">Reports and Metrics</header>
+  <div class="content">
+    <div class="column">
+      <div class="metric-wrapper">
+        <canvas
+          baseChart
+          class="chart"
+          [data]="taskByStatusData"
+          [legend]="taskByStatusLegend"
+          [type]="taskByStatusChartType"
+        >
+        </canvas>
+      </div>
+    </div>
+    <div class="column">
+      <div class="metric-wrapper">
+        <canvas
+          baseChart
+          class="chart"
+          [data]="taskCompletionRateData"
+          [legend]="taskCompletionRateLegend"
+          [type]="taskCompletionRateChartType"
+        >
+        </canvas>
+      </div>
+    </div>
+    <div class="column"></div>
+    <div class="column"></div>
+  </div>
+</div>

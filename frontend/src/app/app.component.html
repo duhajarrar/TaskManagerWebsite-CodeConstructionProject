@@ -1,0 +1,72 @@
+<mat-sidenav-container fixedInViewport>
+  <mat-sidenav #sidenav mode="side" opened>
+    <div class="sidenav-flex-container">
+      <div class="sidenav-button-container">
+        <button mat-icon-button aria-label="menu">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+      <div class="sidenav-button-container">
+        <button
+          mat-icon-button
+          aria-label="home"
+          [ngClass]="{ active: isSelected('') }"
+          routerLink="/"
+        >
+          <mat-icon>home</mat-icon>
+        </button>
+      </div>
+      <div class="sidenav-button-container">
+        <button
+          mat-icon-button
+          [ngClass]="{ active: isSelected('task') }"
+          aria-label="tasks"
+          routerLink="/task"
+        >
+          <mat-icon>assignment</mat-icon>
+        </button>
+      </div>
+      <div class="sidenav-button-container" *ngIf="isLoggedIn && isAdmin">
+        <button
+          mat-icon-button
+          aria-label="users"
+          [ngClass]="{ active: isSelected('user') }"
+          routerLink="/user"
+        >
+          <mat-icon>people</mat-icon>
+        </button>
+      </div>
+
+      <div class="sidenav-button-container bottom-button">
+        <button
+          mat-icon-button
+          aria-label="login"
+          [ngClass]="{ active: isSelected('login') }"
+          routerLink="/login"
+        >
+          <mat-icon *ngIf="isLoggedIn">exit_to_app</mat-icon>
+          <mat-icon *ngIf="!isLoggedIn">person</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- <mat-toolbar color="primary">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>My App</span>
+    </mat-toolbar> -->
+    <div class="content" role="main">
+      <router-outlet> </router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->

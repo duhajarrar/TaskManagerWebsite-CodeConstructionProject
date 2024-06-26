@@ -1,0 +1,214 @@
+{
+  "user": [
+    {
+      "id": "abuqare",
+      "name": "abuqare3",
+      "password": "123123123",
+      "email": "abuqare@gmail.com",
+      "gender": "male",
+      "role": "admin",
+      "isActive": true
+    },
+    {
+      "id": "user1",
+      "name": "user1name",
+      "password": "123123123",
+      "email": "user1@gmail.com",
+      "gender": "male",
+      "role": "staff",
+      "isActive": false
+    },
+    {
+      "id": "user3",
+      "name": "user3",
+      "password": "123123123",
+      "email": "user3@gmail.com",
+      "gender": "male",
+      "role": "staff",
+      "isActive": true
+    }
+  ],
+  "role": [
+    {
+      "code": "staff",
+      "name": "Staff"
+    },
+    {
+      "code": "quality",
+      "name": "Quality"
+    }
+  ],
+  "task": [
+    {
+      "id": "task_1",
+      "name": "Feed dogs",
+      "tag": [{ "name": "dummy" }, { "name": "tag1" }],
+      "description": "Go to the backyard and feed the dogs ",
+      "priority": "high",
+      "pre_requisites": [{ "name": "dummy" }],
+      "status": "inprogress",
+      "assignee": [{ "name": "abuqare" }],
+      "due_date": "dummy",
+      "category": "Job",
+      "progress": 10
+    },
+    {
+      "id": "task_1234",
+      "name": "dummy2",
+      "tag": [{ "name": "dummy2" }],
+      "description": "dummy2",
+      "priority": "dummy",
+      "pre_requisites": ["dummy2", "dummy2"],
+      "status": "done",
+      "assignee": [{ "name": "dummy2" }],
+      "due_date": "dummy2",
+      "category": "Homework",
+      "progress": 20
+    },
+    {
+      "id": "task_12345",
+      "name": "dummy2",
+      "tag": [{ "name": "dummy2" }],
+      "description": "dummy2",
+      "priority": "dummy",
+      "pre_requisites": ["dummy2", "dummy2"],
+      "status": "done",
+      "assignee": [{ "name": "dummy2" }],
+      "due_date": "dummy2",
+      "category": "Homework",
+      "progress": 30
+    },
+    {
+      "id": "task_12346",
+      "name": "dummy2",
+      "tag": [{ "name": "dummy2" }],
+      "description": "dummy2",
+      "priority": "dummy",
+      "pre_requisites": ["dummy2", "dummy2"],
+      "status": "todo",
+      "assignee": [{ "name": "dummy2" }],
+      "due_date": "dummy2",
+      "category": "Homework",
+      "progress": 10
+    },
+    {
+      "id": "task_198",
+      "name": "Feed dogs",
+      "tag": [{ "name": "dummy" }, { "name": "tag1" }],
+      "description": "Go to the backyard and feed the dogs ",
+      "priority": "high",
+      "pre_requisites": [{ "name": "dummy" }],
+      "status": "done",
+      "assignee": [{ "name": "abuqare" }],
+      "due_date": "dummy",
+      "category": "Job",
+      "progress": 10
+    },
+    {
+      "id": "task_29",
+      "name": "Water plants",
+      "tag": [{ "name": "tag2" }],
+      "description": "Go to the garden and water the plants",
+      "priority": "medium",
+      "pre_requisites": [{ "name": "dummy" }],
+      "status": "todo",
+      "assignee": [{ "name": "john" }],
+      "due_date": "dummy",
+      "category": "Home",
+      "progress": 0
+    },
+    {
+      "id": "task_19",
+      "name": "Finish Project Proposal",
+      "tags": [{ "name": "project" }, { "name": "proposal" }],
+      "description": "Finish writing the proposal for the new project",
+      "priority": "high",
+      "pre_requisites": [{ "name": "Research project requirements" }],
+      "status": "inprogress",
+      "assignee": [{ "name": "John Smith", "avatar": "john_smith.jpg" }],
+      "due_date": "2023-05-15T09:00:00.000Z",
+      "category": "Work",
+      "progress": 25
+    },
+    {
+      "id": "task_2",
+      "name": "Clean the living room",
+      "tag": [{ "name": "home" }, { "name": "cleaning" }],
+      "description": "Vacuum and dust all surfaces in the living room",
+      "priority": "medium",
+      "pre_requisites": [{ "name": "task_1" }],
+      "status": "todo",
+      "assignee": [{ "name": "johndoe" }],
+      "due_date": "2023-06-01",
+      "category": "Home",
+      "progress": 0
+    },
+    {
+      "id": "task_3",
+      "name": "Prepare for meeting",
+      "tag": [{ "name": "work" }, { "name": "meeting" }],
+      "description": "Review meeting agenda and prepare talking points",
+      "priority": "high",
+      "pre_requisites": [{ "name": "dummy" }],
+      "status": "inprogress",
+      "assignee": [{ "name": "janedoe" }],
+      "due_date": "2023-05-10",
+      "category": "Work",
+      "progress": 50
+    },
+    {
+      "id": "task_4",
+      "name": "Buy groceries",
+      "tag": [{ "name": "shopping" }, { "name": "groceries" }],
+      "description": "Go to the supermarket and buy groceries for the week",
+      "priority": "low",
+      "pre_requisites": [{ "name": "dummy" }],
+      "status": "todo",
+      "assignee": [{ "name": "abuqare" }],
+      "due_date": "2023-05-05",
+      "category": "Home",
+      "progress": 0
+    },
+    {
+      "id": "task_5",
+      "name": "Update website content",
+      "tag": [
+        { "name": "work", "color": "#ffb74d" },
+        { "name": "website", "color": "#4db6ac" }
+      ],
+      "description": "Review and update website content with new information",
+      "priority": "medium",
+      "pre_requisites": [{ "name": "dummy" }],
+      "status": "inprogress",
+      "assignee": [{ "name": "johndoe" }],
+      "due_date": "2023-05-15",
+      "category": "Work",
+      "progress": 20
+    },
+    {
+      "id": "task_6",
+      "name": "Take out the trash",
+      "tag": [
+        { "name": "home", "color": "red" },
+        { "name": "cleaning", "color": "black" }
+      ],
+      "description": "Empty all the trash cans in the house and take them outside",
+      "priority": "low",
+      "pre_requisites": [{ "name": "dummy" }],
+      "status": "todo",
+      "assignee": [{ "name": "abuqare" }],
+      "due_date": "2023-05-02",
+      "category": "Home",
+      "progress": 0
+    }
+  ],
+  "status": [
+    { "code": "inprogress", "name": "In Progress", "index": 1 },
+    { "code": "todo", "name": "To Do", "index": 0 },
+    { "code": "done", "name": "Done", "index": 2 }
+  ],
+  "category": [
+    { "code": "food", "name": "Food", "index": 1 },
+    { "code": "animal", "name": "Animal", "index": 0 }
+  ]
+}

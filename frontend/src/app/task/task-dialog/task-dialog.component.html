@@ -1,0 +1,92 @@
+<form [formGroup]="taskForm" (ngSubmit)="submitTask()">
+  <h1 mat-dialog-title>{{ data.actionType }} Task</h1>
+  <div mat-dialog-content class="flex-container custom-dialog-content">
+    <div class="flex-item">
+      <mat-form-field>
+        <mat-label> Task title</mat-label>
+        <input formControlName="taskName" matInput type="text" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" rows="8"></textarea>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Assignee</mat-label>
+        <input matInput formControlName="assignee" />
+        <mat-autocomplete autoActiveFirstOption #auto>
+          <mat-option
+            *ngFor="let item of filterUserslist | async"
+            [value]="item.name"
+            >{{ item.name }}</mat-option
+          >
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-checkbox class="precentage" formControlName="completed"
+        >Is Completed</mat-checkbox
+      >
+    </div>
+
+    <div class="flex-item">
+      <mat-form-field>
+        <mat-label>Priority</mat-label>
+        <mat-select formControlName="priorityLevel">
+          <mat-option
+            [value]="priority.value"
+            *ngFor="let priority of TaskPriority | keyvalue"
+            >{{ priority.value }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option
+            [value]="status.value"
+            *ngFor="let status of TaskStatus | keyvalue"
+            >{{ status.value }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field flex-item>
+        <mat-label>End date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dueDate" />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-hint>dd/MM/yyyy</mat-hint>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field flex-item>
+        <mat-label>Category</mat-label>
+        <input formControlName="category" matInput />
+      </mat-form-field>
+
+      <mat-form-field flex-item>
+        <mat-label>Tags(Seperate tags by comma ",")</mat-label>
+        <input matInput formControlName="tags" />
+      </mat-form-field>
+
+      <div class="precentage">
+        <label>Achieved Percentage </label>
+        <label class="precentage">{{ slider.value }}</label>
+      </div>
+      <mat-slider class="precentage" min="0" max="100" step="10" flex-item>
+        <input
+          matInput
+          matSliderThumb
+          formControlName="achievedPercentage"
+          #slider
+        />
+      </mat-slider>
+    </div>
+  </div>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button type="submit" color="primary">Save</button>
+    <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</form>

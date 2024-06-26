@@ -1,0 +1,272 @@
+<div fxLayout="column" class="container">
+  <div fxLayout="row inline">
+    <div fxFlex>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Search"
+          #filter
+          (keyup)="filterResults(filter.value)"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+    <div>
+      <button
+        (click)="openNewTaskDialog('Add', '')"
+        mat-raised-button
+        color="primary"
+      >
+        Add Task
+      </button>
+    </div>
+  </div>
+  <div fxLayout="row inline">
+    <div fxFlex>
+      <mat-button-toggle-group [(ngModel)]="view" name="view" aria-label="View">
+        <mat-button-toggle value="board">Board</mat-button-toggle>
+        <mat-button-toggle value="table">View List</mat-button-toggle>
+        <mat-button-toggle value="calendar">Calendar</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <div *ngIf="view == 'board' || view == 'calendar'">
+      <div class="fab-container">
+        <mat-menu #optionsMenu="matMenu">
+          <button
+            mat-menu-item
+            [matMenuTriggerFor]="view == 'calendar' ? statusMenu : null"
+            (click)="view == 'calendar' ? null : setGroupBy('status')"
+          >
+            Status
+          </button>
+          <button
+            mat-menu-item
+            *ngIf="view == 'board'"
+            (click)="setGroupBy('achievedPercentage')"
+          >
+            Progress
+          </button>
+          <button
+            mat-menu-item
+            [matMenuTriggerFor]="view == 'calendar' ? priorityMenu : null"
+            (click)="view == 'calendar' ? null : setGroupBy('priorityLevel')"
+          >
+            Priority
+          </button>
+          <button
+            mat-menu-item
+            [matMenuTriggerFor]="view == 'calendar' ? categoryMenu : null"
+            (click)="view == 'calendar' ? null : setGroupBy('category')"
+          >
+            Category
+          </button>
+        </mat-menu>
+        <mat-menu #priorityMenu="matMenu">
+          <button
+            mat-menu-item
+            (click)="setGroupBy('priorityLevel', priority)"
+            *ngFor="let priority of prioritiesLevels"
+          >
+            {{ priority }}
+          </button>
+        </mat-menu>
+        <mat-menu #statusMenu="matMenu">
+          <button
+            mat-menu-item
+            (click)="setGroupBy('status', status)"
+            *ngFor="let status of tasksStatuses"
+          >
+            {{ status }}
+          </button>
+        </mat-menu>
+        <mat-menu #categoryMenu="matMenu">
+          <button
+            mat-menu-item
+            (click)="setGroupBy('category', category)"
+            *ngFor="let category of categories"
+          >
+            {{ category }}
+          </button>
+        </mat-menu>
+        <button mat-icon-button [matMenuTriggerFor]="optionsMenu">
+          <mat-icon>group_by</mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon>sort_by_alpha</mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon>filter_list</mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="view == 'calendar'">
+    <full-calendar [options]="calendarOptions"></full-calendar>
+  </div>
+  <div fxLayout="row inline">
+    <div class="table-view" *ngIf="view == 'table'">
+      <table mat-table matSort [dataSource]="dataSource">
+        <!-- Position Column -->
+        <ng-container matColumnDef="taskId">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Task Id</th>
+          <td mat-cell *matCellDef="let element">{{ element.taskId }}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="taskName">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element">{{ element.taskName }}</td>
+        </ng-container>
+        <ng-container matColumnDef="tags">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Tags</th>
+          <td mat-cell *matCellDef="let element">
+            <!-- {{ element.tags[0].name }} -->
+            <mat-chip-listbox aria-label="tags">
+              <mat-chip *ngFor="let item of element.tags">{{ item }}</mat-chip>
+            </mat-chip-listbox>
+          </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Description</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.description }}
+          </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="priorityLevel">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>
+            Priority Level
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.priorityLevel }}
+          </td>
+        </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.status }}
+          </td>
+        </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="assignee">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Assignee</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.assignee }}
+          </td>
+        </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="dueDate">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Due Date</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.dueDate | date : "dd/MM/yyyy" }}
+          </td>
+        </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="category">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Category</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.category }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let element">
+            <button
+              (click)="openNewTaskDialog('Edit', element.taskId)"
+              mat-raised-button
+              color="primary"
+            >
+              Edit
+            </button>
+            <span></span>
+            <button
+              (click)="deleteTask(element.taskId)"
+              mat-raised-button
+              color="warn"
+            >
+              Delete
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+        aria-label="Select page of periodic elements"
+      >
+      </mat-paginator>
+    </div>
+    <div class="cards-container" cdkDropListGroup *ngIf="view == 'board'">
+      <div class="column-container" *ngFor="let group of groups">
+        <h2>{{ group }}</h2>
+        <div
+          cdkDropList
+          [cdkDropListData]="groupedList[group]"
+          class="list-container"
+          (cdkDropListDropped)="drop($event, group)"
+        >
+          <cdk-virtual-scroll-viewport itemSize="50" class="viewport">
+            <mat-card
+              class="card"
+              *cdkVirtualFor="let item of groupedList[group]"
+              cdkDrag
+            >
+              <div class="dragging-placeholder" *cdkDragPlaceholder></div>
+              <mat-card-header>
+                <!-- <mat-card-subtitle>{{ item.id }}</mat-card-subtitle> -->
+                <mat-card-title>{{ item.taskName }}</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                {{ item.description }}
+                <!-- <mat-divider></mat-divider>
+          {{ item.status }} -->
+              </mat-card-content>
+              <mat-card-content>
+                <mat-chip-listbox aria-label="tags">
+                  <mat-chip *ngFor="let element of item.tags">{{
+                    element
+                  }}</mat-chip>
+                </mat-chip-listbox>
+              </mat-card-content>
+              <mat-card-actions>
+                <button
+                  (click)="openNewTaskDialog('Edit', item.taskId)"
+                  mat-raised-button
+                  color="primary"
+                >
+                  Edit
+                </button>
+                <span></span>
+                <button
+                  (click)="deleteTask(item.taskId)"
+                  mat-raised-button
+                  color="warn"
+                >
+                  Delete
+                </button>
+
+                <!-- <button mat-button>SHARE</button> -->
+              </mat-card-actions>
+              <mat-card-footer>
+                <mat-progress-bar
+                  mode="determinate"
+                  value="{{ item.achievedPercentage }}"
+                  color="accent"
+                ></mat-progress-bar>
+              </mat-card-footer>
+            </mat-card>
+          </cdk-virtual-scroll-viewport>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

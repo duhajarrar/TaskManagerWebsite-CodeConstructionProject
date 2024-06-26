@@ -1,0 +1,27 @@
+Task manager - Buggiest Code
+Mohammad Abuqare
+Duha Jarrar
+Sahar Adem
+
+Dr. Majed Ayyad
+
+To run it:
+
+frontend
+
+cd frontend/
+npm install
+npm start
+
+backend
+maven run
+
+Mongodb has to be run
+python3 init_mongodb.py
+python3 InsertUsers.py
+python3 InsertTasksForUsers.py
+
+username
+user_num1
+password
+password123

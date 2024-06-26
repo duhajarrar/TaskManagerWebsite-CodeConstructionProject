@@ -1,0 +1,35 @@
+.toolbar {
+  a {
+    color: white;
+  }
+}
+
+.mat-sidenav-content {
+  margin-top: 15px;
+  margin-left: 110px !important;
+}
+.mat-sidenav {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  width: 80px;
+  bottom: 0;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  background: #8294c4;
+}
+
+.sidenav-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-drawer-container {
+  background: #dbdfea;
+}
+.active {
+  background-color: #ffd8e4;
+  color: black;
+  /* other styles... */
+}
